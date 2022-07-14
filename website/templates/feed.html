@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<h2> Welcome {{ user }}!</h2>
+<iframe title="vimeo-player" src="https://player.vimeo.com/video/557442619?h=be6e01e2bb" width="640" height="400" frameborder="0" allowfullscreen></iframe>
+<br>
+<article class="media">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <img src="{{url_for('static', filename='20210812_154948.jpg')}}">
+      </p>
+    </figure>
+    <div class="media-content">
+        <form action="/create" method="POST">
+            <div class="field">
+            <p class="control">
+                <textarea class="textarea" name="post-content" placeholder="Create a post..."></textarea>
+            </p>
+            </div>
+            <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                <button class="button is-link">Submit</button>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                
+                </div>
+            </div>
+        </form>
+      </nav>
+    </div>
+  </article>
+    
+
+    {% for post in posts.values() %}
+   
+    <article class="media">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="{{url_for('static', filename=post['Picture'])}}">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p>
+            <strong>{{ post['Name'] }}</strong> <small>@{{ post['Username'] }}</small> <small>{{ post['DateTime'] }}</small>
+            <br>
+                {{ post['Text'] }}
+            </p>
+          </div>
+
+         
+          <nav class="level is-mobile">
+            <div class="level-left">
+              <a class="level-item">
+                <span class="icon-text">
+                    <span class="icon">
+                      <i class="fas fa-train"></i>
+                    </span>
+                    <span> <small><a>Like</a> · <a>Reply {{ post['Comments'] | count }}</a> </small></span>
+                  </span>
+              </a>
+              <a class="level-item">
+                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+              </a>
+              <a class="level-item">
+                <span class="icon is-small"><i class="fas fa-heart"></i> {{ post['Comments'] | count }} </span>
+              </a>
+            </div>
+          </nav>
+        </div>
+        
+      </article>
+     
+    {% endfor %}
+
+
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<article class="media">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <img src="{{url_for('static', filename='20210812_154948.jpg')}}">
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong>{{ post['Name'] }}</strong>
+          <br>
+          {{ post['Text']}}
+          <br>
+          <small><a>Like</a> · <a>Reply</a> · {{ post['DateTime'] }}</small>
+        </p>
+      </div>
+
+
+      {% for comment in post['Comments'] %}
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-48x48">
+            <img src="{{url_for('static', filename=comment['Picture'])}}">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>{{ comment['Name'] }}</strong>
+              <br>
+              {{ comment['Text']}}
+              <br>
+              <small>{{ post['DateTime'] }}</small>
+            </p>
+          </div>
+  
+          
+        </div>
+      </article>
+      {% endfor %}
+  
+    </div>
+  </article>
+  
+  <article class="media">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <img src="https://bulma.io/images/placeholders/128x128.png">
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="field">
+        <p class="control">
+          <textarea class="textarea" placeholder="Add a comment..."></textarea>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control">
+          <button class="button">Post comment</button>
+        </p>
+      </div>
+    </div>
+  </article>
+
+
+{% endblock %}
